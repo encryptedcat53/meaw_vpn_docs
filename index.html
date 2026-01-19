@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Как использовать Outline VPN</title>
+    <meta name="description" content="Краткая инструкция: скачать Outline Client, получить VPN ключ и подключиться." />
+    <style>
+      :root{
+        --bg: #0b1220;
+        --card: rgba(255,255,255,0.06);
+        --line: rgba(255,255,255,0.14);
+        --text: rgba(255,255,255,0.92);
+        --muted: rgba(255,255,255,0.70);
+        --accent: #22d3ee;
+        --accent2: #7c3aed;
+        --radius: 16px;
+      }
+      *{ box-sizing: border-box; }
+      html, body{ height: 100%; }
+      body{
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+        color: var(--text);
+        background:
+          radial-gradient(900px 500px at 20% 15%, rgba(124,58,237,0.18), transparent 60%),
+          radial-gradient(900px 500px at 85% 20%, rgba(34,211,238,0.16), transparent 60%),
+          linear-gradient(180deg, #070b14 0%, var(--bg) 100%);
+      }
+      .wrap{
+        min-height: 100%;
+        display: grid;
+        place-items: center;
+        padding: 28px 16px;
+      }
+      .card{
+        width: min(860px, 100%);
+        background: var(--card);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: var(--radius);
+        padding: 22px 22px;
+      }
+      header{
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 16px;
+      }
+      .mark{
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(124,58,237,0.90), rgba(34,211,238,0.85));
+        border: 1px solid rgba(255,255,255,0.16);
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+      }
+      .mark span{ font-size: 20px; }
+      h1{
+        margin: 0;
+        font-size: 22px;
+        letter-spacing: -0.2px;
+      }
+      .sub{
+        margin: 6px 0 0;
+        color: var(--muted);
+        line-height: 1.5;
+        font-size: 14.5px;
+      }
+
+      .section{
+        margin-top: 16px;
+      }
+      h2{
+        margin: 0 0 10px;
+        font-size: 15px;
+        color: rgba(255,255,255,0.88);
+      }
+
+      .steps{
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .step{
+        display: flex;
+        gap: 12px;
+        padding: 12px 12px;
+        border-radius: 14px;
+        background: rgba(0,0,0,0.14);
+        border: 1px solid rgba(255,255,255,0.10);
+      }
+      .num{
+        width: 30px;
+        height: 30px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.12);
+        display: grid;
+        place-items: center;
+        color: rgba(255,255,255,0.88);
+        font-weight: 650;
+        flex: 0 0 auto;
+      }
+      .step strong{
+        display: block;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .step p{
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+        font-size: 14px;
+      }
+
+      .note{
+        margin-top: 14px;
+        padding: 12px 12px;
+        border-radius: 14px;
+        background: rgba(34,211,238,0.08);
+        border: 1px solid rgba(34,211,238,0.18);
+        color: rgba(255,255,255,0.86);
+        line-height: 1.55;
+        font-size: 14px;
+      }
+
+      a{
+        color: rgba(255,255,255,0.92);
+        text-decoration: underline;
+        text-decoration-color: rgba(34,211,238,0.55);
+        text-underline-offset: 3px;
+      }
+
+      footer{
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        color: rgba(255,255,255,0.55);
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+
+      .pill{
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.05);
+        color: rgba(255,255,255,0.78);
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="card" role="region" aria-label="Как использовать Outline VPN">
+        <header>
+          <div class="mark" aria-hidden="true"><span>📖</span></div>
+          <div>
+            <h1>Как использовать Outline VPN</h1>
+            <p class="sub">
+              Короткая инструкция: скачайте Outline Client, получите VPN-ключ в Telegram и подключитесь.
+            </p>
+          </div>
+        </header>
+
+        <div class="section">
+          <h2>Шаги</h2>
+          <ul class="steps">
+            <li class="step">
+              <div class="num">1</div>
+              <div>
+                <strong>Скачайте Outline Client</strong>
+                <p>В Telegram-боте нажмите кнопку «Скачать клиент», чтобы получить приложение.</p>
+              </div>
+            </li>
+
+            <li class="step">
+              <div class="num">2</div>
+              <div>
+                <strong>Получите VPN-ключ</strong>
+                <p>В Telegram-боте нажмите кнопку «Получить ключ», чтобы получить URL доступа.</p>
+              </div>
+            </li>
+
+            <li class="step">
+              <div class="num">3</div>
+              <div>
+                <strong>Подключитесь</strong>
+                <p>
+                  1) Откройте Outline Client<br />
+                  2) Нажмите «Добавить сервер» или «+»<br />
+                  3) Вставьте ваш URL доступа<br />
+                  4) Нажмите «Подключиться»
+                </p>
+              </div>
+            </li>
+          </ul>
+
+        <footer>
+          <span class="pill">Outline VPN</span>
+          <span class="pill">Telegram-бот</span>
+          <div style="margin-top:10px;">
+            Если ссылка на руководство не открывается, скопируйте и вставьте её в браузер.
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
