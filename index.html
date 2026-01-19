@@ -1,8 +1,485 @@
-<html>
-<head>
-	<title>Test</title>
-</head>
-<body>
-	<h1>Test</h1>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Documentation In Progress</title>
+    <meta name="description" content="Service documentation is currently being prepared. Please check back soon." />
+    <style>
+      :root{
+        --bg: #0b1220;
+        --panel: rgba(255,255,255,0.06);
+        --panel2: rgba(255,255,255,0.10);
+        --text: rgba(255,255,255,0.92);
+        --muted: rgba(255,255,255,0.70);
+        --muted2: rgba(255,255,255,0.55);
+        --line: rgba(255,255,255,0.14);
+        --shadow: 0 24px 70px rgba(0,0,0,0.55);
+        --radius: 20px;
+
+        --accent1: #7c3aed;
+        --accent2: #22d3ee;
+        --accent3: #a3ffb0;
+      }
+
+      *{ box-sizing: border-box; }
+      html, body{ height: 100%; }
+      body{
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+        color: var(--text);
+        background: radial-gradient(1200px 700px at 10% 10%, rgba(124,58,237,0.22), transparent 55%),
+                    radial-gradient(900px 600px at 90% 20%, rgba(34,211,238,0.18), transparent 60%),
+                    radial-gradient(1000px 700px at 60% 100%, rgba(163,255,176,0.10), transparent 55%),
+                    linear-gradient(180deg, #070b14 0%, var(--bg) 100%);
+        overflow-x: hidden;
+      }
+
+      .wrap{
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 18px;
+      }
+
+      .card{
+        width: min(920px, 100%);
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.05));
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255,255,255,0.12);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before{
+        content:"";
+        position: absolute;
+        inset: -2px;
+        background: radial-gradient(600px 260px at 20% 10%, rgba(124,58,237,0.35), transparent 70%),
+                    radial-gradient(700px 260px at 80% 0%, rgba(34,211,238,0.28), transparent 70%),
+                    radial-gradient(700px 260px at 70% 110%, rgba(163,255,176,0.18), transparent 75%);
+        filter: blur(18px);
+        opacity: 0.65;
+        z-index: 0;
+      }
+
+      .card::after{
+        content:"";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(120deg, rgba(255,255,255,0.08), transparent 28%),
+          linear-gradient(300deg, rgba(255,255,255,0.06), transparent 22%);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .content{
+        position: relative;
+        z-index: 1;
+        padding: 34px 34px 26px;
+      }
+
+      header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .logo{
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(124,58,237,0.95), rgba(34,211,238,0.90));
+        box-shadow: 0 14px 40px rgba(124,58,237,0.22);
+        border: 1px solid rgba(255,255,255,0.18);
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+      }
+
+      .logo svg{
+        width: 26px;
+        height: 26px;
+        opacity: 0.95;
+      }
+
+      .brandText{
+        display: flex;
+        flex-direction: column;
+        line-height: 1.15;
+        min-width: 0;
+      }
+
+      .brandText .title{
+        font-weight: 650;
+        letter-spacing: 0.2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .brandText .subtitle{
+        font-size: 13px;
+        color: var(--muted2);
+        margin-top: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .badge{
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.14);
+        color: var(--muted);
+        font-size: 13px;
+        flex: 0 0 auto;
+      }
+
+      .dot{
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(34,211,238,0.85));
+        box-shadow: 0 0 0 4px rgba(34,211,238,0.12);
+      }
+
+      main{
+        display: grid;
+        grid-template-columns: 1.35fr 0.65fr;
+        gap: 26px;
+        padding-top: 26px;
+      }
+
+      @media (max-width: 860px){
+        main{ grid-template-columns: 1fr; }
+      }
+
+      h1{
+        margin: 0;
+        font-size: clamp(26px, 3vw, 36px);
+        letter-spacing: -0.3px;
+      }
+
+      p{
+        margin: 12px 0 0;
+        color: var(--muted);
+        line-height: 1.6;
+        font-size: 15.5px;
+      }
+
+      .panel{
+        background: rgba(0,0,0,0.14);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 18px;
+        padding: 16px 16px;
+      }
+
+      .panel h2{
+        margin: 0;
+        font-size: 14px;
+        letter-spacing: 0.2px;
+        color: rgba(255,255,255,0.86);
+      }
+
+      .list{
+        margin-top: 12px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .item{
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        padding: 10px 10px;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.10);
+      }
+
+      .icon{
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.14);
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+      }
+
+      .icon span{
+        font-size: 16px;
+        line-height: 1;
+      }
+
+      .item .txt{
+        min-width: 0;
+      }
+
+      .item .txt strong{
+        display: block;
+        font-size: 13.5px;
+        color: rgba(255,255,255,0.88);
+        font-weight: 650;
+      }
+
+      .item .txt small{
+        display: block;
+        font-size: 12.5px;
+        color: var(--muted2);
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+
+      .ctaRow{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .btn{
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.14);
+        background: rgba(255,255,255,0.06);
+        color: rgba(255,255,255,0.90);
+        text-decoration: none;
+        font-size: 13.5px;
+        cursor: default;
+        user-select: none;
+      }
+
+      .btnPrimary{
+        background: linear-gradient(135deg, rgba(124,58,237,0.85), rgba(34,211,238,0.75));
+        border: 1px solid rgba(255,255,255,0.18);
+        box-shadow: 0 16px 40px rgba(124,58,237,0.18);
+      }
+
+      .btn span.kbd{
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: rgba(0,0,0,0.18);
+        border: 1px solid rgba(255,255,255,0.14);
+        color: rgba(255,255,255,0.82);
+      }
+
+      .progress{
+        margin-top: 14px;
+      }
+
+      .bar{
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.10);
+        overflow: hidden;
+      }
+
+      .fill{
+        width: 62%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(124,58,237,0.95), rgba(34,211,238,0.90), rgba(163,255,176,0.70));
+        border-radius: 999px;
+      }
+
+      .meta{
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted2);
+        font-size: 12.5px;
+      }
+
+      footer{
+        position: relative;
+        z-index: 1;
+        padding: 18px 34px 26px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+        color: var(--muted2);
+        font-size: 12.5px;
+      }
+
+      .pill{
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.14);
+        background: rgba(255,255,255,0.05);
+        color: rgba(255,255,255,0.78);
+      }
+
+      .pill .tinyDot{
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(163,255,176,0.9);
+        box-shadow: 0 0 0 4px rgba(163,255,176,0.10);
+      }
+
+      .glow{
+        position: absolute;
+        width: 520px;
+        height: 520px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(34,211,238,0.14), transparent 60%);
+        right: -220px;
+        top: -260px;
+        filter: blur(6px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .glow2{
+        position: absolute;
+        width: 560px;
+        height: 560px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(124,58,237,0.14), transparent 62%);
+        left: -260px;
+        bottom: -320px;
+        filter: blur(6px);
+        z-index: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="card" role="region" aria-label="Documentation placeholder">
+        <div class="glow" aria-hidden="true"></div>
+        <div class="glow2" aria-hidden="true"></div>
+
+        <div class="content">
+          <header>
+            <div class="brand">
+              <div class="logo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2.6c4.97 0 9 4.03 9 9 0 4.97-4.03 9-9 9s-9-4.03-9-9c0-4.97 4.03-9 9-9Z" stroke="rgba(255,255,255,0.92)" stroke-width="1.6"/>
+                  <path d="M7.7 12.2 10.2 14.7 16.4 8.6" stroke="rgba(255,255,255,0.92)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="brandText">
+                <div class="title">VPN Service Documentation</div>
+                <div class="subtitle">Outline-based access via Telegram bot</div>
+              </div>
+            </div>
+
+            <div class="badge" aria-label="Status badge">
+              <span class="dot" aria-hidden="true"></span>
+              In progress
+            </div>
+          </header>
+
+          <main>
+            <section>
+              <h1>Documentation is being prepared</h1>
+              <p>
+                The guide on how to use this service is currently in progress.
+                We are polishing setup steps, troubleshooting tips, and best practices to keep everything clear and secure.
+              </p>
+
+              <div class="ctaRow" aria-label="Quick actions">
+                <span class="btn btnPrimary" aria-disabled="true">📄 User Guide <span class="kbd">coming soon</span></span>
+                <span class="btn" aria-disabled="true">🧩 FAQ <span class="kbd">coming soon</span></span>
+                <span class="btn" aria-disabled="true">🛠️ Troubleshooting <span class="kbd">coming soon</span></span>
+              </div>
+
+              <div class="progress" aria-label="Progress">
+                <div class="bar" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100">
+                  <div class="fill"></div>
+                </div>
+                <div class="meta">
+                  <span>Content drafting</span>
+                  <span>~62%</span>
+                </div>
+              </div>
+            </section>
+
+            <aside class="panel">
+              <h2>What will be included</h2>
+              <div class="list" role="list">
+                <div class="item" role="listitem">
+                  <div class="icon" aria-hidden="true"><span>✅</span></div>
+                  <div class="txt">
+                    <strong>Getting started</strong>
+                    <small>How to request a key in Telegram and connect with Outline.</small>
+                  </div>
+                </div>
+
+                <div class="item" role="listitem">
+                  <div class="icon" aria-hidden="true"><span>📱</span></div>
+                  <div class="txt">
+                    <strong>Client setup</strong>
+                    <small>Install links and setup steps for iOS, Android, Windows, macOS, and Linux.</small>
+                  </div>
+                </div>
+
+                <div class="item" role="listitem">
+                  <div class="icon" aria-hidden="true"><span>📊</span></div>
+                  <div class="txt">
+                    <strong>Traffic & limits</strong>
+                    <small>How usage is calculated and how to check remaining traffic.</small>
+                  </div>
+                </div>
+
+                <div class="item" role="listitem">
+                  <div class="icon" aria-hidden="true"><span>🩺</span></div>
+                  <div class="txt">
+                    <strong>Status & incidents</strong>
+                    <small>Where to see service health updates and planned maintenance.</small>
+                  </div>
+                </div>
+
+                <div class="item" role="listitem">
+                  <div class="icon" aria-hidden="true"><span>🔒</span></div>
+                  <div class="txt">
+                    <strong>Security notes</strong>
+                    <small>Practical tips for keeping your access key safe.</small>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </main>
+        </div>
+
+        <footer>
+          <span class="pill"><span class="tinyDot" aria-hidden="true"></span> Service: Online</span>
+          <span>Last updated: <span aria-label="Date">Today</span></span>
+        </footer>
+      </div>
+    </div>
+  </body>
 </html>
